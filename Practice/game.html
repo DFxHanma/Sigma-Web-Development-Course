@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shooting Game</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+      background: #222;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let shooter = { x: canvas.width / 2, y: canvas.height - 50, width: 50, height: 20 };
+    let bullets = [];
+    let target = { x: Math.random() * canvas.width, y: 50, width: 50, height: 50, speed: 2 };
+
+    const keys = { left: false, right: false, space: false };
+
+    // Handle key presses
+    window.addEventListener("keydown", (e) => {
+      if (e.code === "ArrowLeft") keys.left = true;
+      if (e.code === "ArrowRight") keys.right = true;
+      if (e.code === "Space") keys.space = true;
+    });
+
+    window.addEventListener("keyup", (e) => {
+      if (e.code === "ArrowLeft") keys.left = false;
+      if (e.code === "ArrowRight") keys.right = false;
+      if (e.code === "Space") keys.space = false;
+    });
+
+    function update() {
+      // Move shooter
+      if (keys.left) shooter.x -= 5;
+      if (keys.right) shooter.x += 5;
+
+      // Keep shooter within bounds
+      shooter.x = Math.max(0, Math.min(canvas.width - shooter.width, shooter.x));
+
+      // Fire bullets
+      if (keys.space) {
+        bullets.push({ x: shooter.x + shooter.width / 2 - 2, y: shooter.y - 10, width: 4, height: 10 });
+        keys.space = false; // Prevent continuous firing
+      }
+
+      // Move bullets
+      bullets = bullets.filter((bullet) => bullet.y > 0);
+      bullets.forEach((bullet) => (bullet.y -= 5));
+
+      // Move target
+      target.x += target.speed;
+      if (target.x <= 0 || target.x + target.width >= canvas.width) target.speed *= -1;
+
+      // Check for collisions
+      bullets.forEach((bullet, bulletIndex) => {
+        if (
+          bullet.x < target.x + target.width &&
+          bullet.x + bullet.width > target.x &&
+          bullet.y < target.y + target.height &&
+          bullet.y + bullet.height > target.y
+        ) {
+          // Remove bullet and reset target
+          bullets.splice(bulletIndex, 1);
+          target.x = Math.random() * canvas.width;
+          target.y = 50;
+        }
+      });
+    }
+
+    function draw() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw shooter
+      ctx.fillStyle = "lime";
+      ctx.fillRect(shooter.x, shooter.y, shooter.width, shooter.height);
+
+      // Draw bullets
+      ctx.fillStyle = "yellow";
+      bullets.forEach((bullet) => ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height));
+
+      // Draw target
+      ctx.fillStyle = "red";
+      ctx.fillRect(target.x, target.y, target.width, target.height);
+    }
+
+    function gameLoop() {
+      update();
+      draw();
+      requestAnimationFrame(gameLoop);
+    }
+
+    gameLoop();
+  </script>
+</body>
+</html>

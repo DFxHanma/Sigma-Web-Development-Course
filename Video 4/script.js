@@ -1,0 +1,1 @@
+alert("Nazar Kidhar Hai Dhyan Kidhar Hai Tarun Bhai Ki website Idher Hai")

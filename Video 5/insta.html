@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+        .navbar {
+            background-color: #fff;
+            padding: 10px 20px;
+            border-bottom: 1px solid #dbdbdb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h1 {
+            font-size: 24px;
+            color: #262626;
+        }
+        .profile-section {
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .profile-picture {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #dbdbdb;
+            margin-right: 20px;
+        }
+        .profile-info {
+            font-size: 16px;
+        }
+        .feed {
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .post {
+            background-color: #fff;
+            border: 1px solid #dbdbdb;
+            margin-bottom: 20px;
+        }
+        .post-header {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #dbdbdb;
+        }
+        .post-header .profile-picture {
+            width: 40px;
+            height: 40px;
+        }
+        .post-header .username {
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .post-image {
+            width: 100%;
+            height: auto;
+        }
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Instagram</h1>
+    </div>
+    <div class="profile-section">
+        <div class="profile-picture"></div>
+        <div class="profile-info">
+            <h2>@username</h2>
+            <p>10 Posts | 100 Followers | 200 Following</p>
+        </div>
+    </div>
+    <div class="feed">
+        <div class="post">
+            <div class="post-header">
+                <div class="profile-picture"></div>
+                <div class="username">@username</div>
+            </div>
+            <img class="post-image" src="https://via.placeholder.com/600" alt="Post Image">
+            <div class="post-actions">
+                <button>Like</button>
+                <button>Comment</button>
+                <button>Share</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
