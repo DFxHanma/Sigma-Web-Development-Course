@@ -1,0 +1,28 @@
+Element,Description
+<html>,Defines the root of an HTML document.
+<head>,"Contains meta-information about the document, such as the title and links to stylesheets."
+<title>,Specifies the title of the webpage (appears in the browser tab).
+<body>,Contains the main content of the webpage.
+"<h1>, <h2>, ..., <h6>","Heading elements, where <h1> is the largest heading and <h6> is the smallest."
+<p>,Defines a paragraph of text.
+<a>,Creates a hyperlink.
+<img>,Embeds an image.
+<div>,"Defines a division or section of content, often used for grouping."
+<span>,"Defines a small section of content, often used for styling part of a text."
+<ul>,Creates an unordered (bulleted) list.
+<ol>,Creates an ordered (numbered) list.
+<li>,Defines a list item in an ordered or unordered list.
+<table>,Defines a table.
+<tr>,Defines a table row.
+<td>,Defines a table cell (data).
+<th>,Defines a table header cell.
+<form>,Defines a form for user input.
+<input>,"Defines an input field (e.g., text box, radio button, etc.)."
+<button>,Defines a clickable button.
+<br>,Inserts a line break.
+<strong>,Defines important text (bold).
+<em>,Defines emphasized text (italic).
+<iframe>,Embeds another HTML page within the current page.
+<link>,Specifies external resources like stylesheets.
+<meta>,"Defines metadata like character set, author, or viewport information."
+<style>,Defines CSS styles for the document.
