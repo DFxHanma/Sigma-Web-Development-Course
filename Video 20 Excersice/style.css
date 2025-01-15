@@ -1,8 +1,8 @@
-#head{
+#head {
     background-color: red;
-    color: white;
+    color: rgba(230, 224, 224, 0.904);
     text-align: center;
     padding: 20px;
     margin: 15px;
-    border: 5px solid blue;
+    border: 5px solid rgb(87, 87, 146);
 }
