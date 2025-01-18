@@ -1,43 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS Display Property</title>
     <style>
-        * {
+        *{
             margin: 0;
             padding: 0;
         }
-
-        .box {
-            border: 2px solid blue;
+        .box{
+            border: 2px solid rgb(255, 255, 255);
             display: inline-block;
-            width: 344px;
-            padding: 45px;
-            margin: 34px;
-            
+            width: 355px;
+            padding: 56px;
+            margin: 56px;
+            box-shadow: 5px 5px 10px;
         }
-
-        .box1 {
-            /* display: none;  */
+        .box1{
+            /* display: none; */
             /* visibility: hidden; */
             /* display: flex; */
-            
         }
+
+
+
     </style>
 </head>
-
 <body>
-    <!-- https://developer.mozilla.org/en-US/docs/Web/CSS/display -->
-    <div class="box box1">
+    <div class="box">
         I am a box
     </div>
-    <div class="box">also a nice box</div>
-
+    <div class="box">
+        also a nice box
+    </div>
     <span>I am a good</span>
     <span>boy</span>
 </body>
-
 </html>
