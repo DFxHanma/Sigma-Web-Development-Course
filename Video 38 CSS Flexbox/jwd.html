@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jumping Game</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    canvas {
+      border: 2px solid #000;
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+  <script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Game settings
+    const GRAVITY = 0.5;
+    const JUMP_FORCE = -10;
+    const PLAYER_SIZE = 50;
+    const OBSTACLE_WIDTH = 30;
+    const OBSTACLE_HEIGHT = 60;
+    const OBSTACLE_SPEED = 5;
+
+    // Player
+    const player = {
+      x: 100,
+      y: canvas.height - PLAYER_SIZE - 10,
+      width: PLAYER_SIZE,
+      height: PLAYER_SIZE,
+      velocity: 0,
+      onGround: true,
+      color: 'red'
+    };
+
+    // Obstacles
+    const obstacles = [];
+    let obstacleTimer = 0;
+    let score = 0;
+
+    // Jump function
+    function jump() {
+      if (player.onGround) {
+        player.velocity = JUMP_FORCE;
+        player.onGround = false;
+      }
+    }
+
+    // Create obstacle
+    function createObstacle() {
+      obstacles.push({
+        x: canvas.width,
+        y: canvas.height - OBSTACLE_HEIGHT - 10,
+        width: OBSTACLE_WIDTH,
+        height: OBSTACLE_HEIGHT,
+        color: 'black'
+      });
+    }
+
+    // Check collision
+    function checkCollision(rect1, rect2) {
+      return (
+        rect1.x < rect2.x + rect2.width &&
+        rect1.x + rect1.width > rect2.x &&
+        rect1.y < rect2.y + rect2.height &&
+        rect1.y + rect1.height > rect2.y
+      );
+    }
+
+    // Game loop
+    function gameLoop() {
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update player
+      player.velocity += GRAVITY;
+      player.y += player.velocity;
+
+      // Ground collision
+      if (player.y + player.height > canvas.height - 10) {
+        player.y = canvas.height - player.height - 10;
+        player.onGround = true;
+        player.velocity = 0;
+      }
+
+      // Update obstacles
+      obstacleTimer++;
+      if (obstacleTimer > 100) {
+        createObstacle();
+        obstacleTimer = 0;
+      }
+
+      for (let i = obstacles.length - 1; i >= 0; i--) {
+        obstacles[i].x -= OBSTACLE_SPEED;
+
+        // Remove off-screen obstacles
+        if (obstacles[i].x + obstacles[i].width < 0) {
+          obstacles.splice(i, 1);
+          score++;
+        }
+
+        // Check collision
+        if (checkCollision(player, obstacles[i])) {
+          alert(`Game Over! Score: ${score}`);
+          document.location.reload();
+        }
+      }
+
+      // Draw player
+      ctx.fillStyle = player.color;
+      ctx.fillRect(player.x, player.y, player.width, player.height);
+
+      // Draw obstacles
+      for (const obstacle of obstacles) {
+        ctx.fillStyle = obstacle.color;
+        ctx.fillRect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+      }
+
+      // Draw score
+      ctx.fillStyle = 'black';
+      ctx.font = '24px Arial';
+      ctx.fillText(`Score: ${score}`, 10, 30);
+
+      // Request next frame
+      requestAnimationFrame(gameLoop);
+    }
+
+    // Event listener for jumping
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        jump();
+      }
+    });
+
+    // Start game
+    gameLoop();
+  </script>
+</body>
+</html>
